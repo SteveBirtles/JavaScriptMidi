@@ -136,13 +136,13 @@ function frame(timestamp) {
       wave = 'triangle';
     }
 
-    if (pressedKeys["UpArrow"]) {
+    if (pressedKeys["ArrowUp"]) {
         speed *= 2
-    } else if (pressedKeys["DownArrow"]) {
+    } else if (pressedKeys["ArrowDown"]) {
         speed /= 2
-    } else if (pressedKeys["LeftArrow"]) {
+    } else if (pressedKeys["ArrowLeft"]) {
         fadeOut *= 2
-    } else if (pressedKeys["RightArrow"]) {
+    } else if (pressedKeys["ArrowRight"]) {
         fadeOut /= 2
     }
 
