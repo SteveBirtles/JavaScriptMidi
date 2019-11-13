@@ -130,11 +130,11 @@ function frame(timestamp) {
     if (pressedKeys["1"]) {
       wave = 'sine';
     } else if (pressedKeys["2"]) {
-      wave = 'square';
-    } else if (pressedKeys["3"]) {
-      wave = 'sawtooth';
-    } else if (pressedKeys["4"]) {
       wave = 'triangle';
+    } else if (pressedKeys["3"]) {
+      wave = 'square';
+    } else if (pressedKeys["4"]) {
+      wave = 'sawtooth';
     }
 
     if (pressedKeys["ArrowUp"]) {
@@ -143,10 +143,10 @@ function frame(timestamp) {
     } else if (pressedKeys["ArrowDown"]) {
         if (!keydown) speed /= 2;
         keydown = true;
-    } else if (pressedKeys["ArrowLeft"]) {
+    } else if (pressedKeys["ArrowRight"]) {
         if (!keydown) fadeOut *= 2;
         keydown = true;
-    } else if (pressedKeys["ArrowRight"]) {
+    } else if (pressedKeys["ArrowLeft"]) {
         if (!keydown) fadeOut /= 2;
         keydown = true;
     } else {
