@@ -6,6 +6,7 @@ let fadeOut = 1;
 let keyboardEvents = [];
 let audioContext = new AudioContext();
 let pressedKeys = {};
+let keydown = false;
 
 let wave = 'square';
 
@@ -137,13 +138,19 @@ function frame(timestamp) {
     }
 
     if (pressedKeys["ArrowUp"]) {
-        speed *= 2
+        if (!keydown) speed *= 2;
+        keydown = true;
     } else if (pressedKeys["ArrowDown"]) {
-        speed /= 2
-    } else if (pressedKeys["ArrowLeft"]) {
-        fadeOut *= 2
+        if (!keydown) speed /= 2;
+        keydown = true;
+    } else if (promressedKeys["ArrowLeft"]) {
+        if (!keydown) fadeOut *= 2;
+        keydown = true;
     } else if (pressedKeys["ArrowRight"]) {
-        fadeOut /= 2
+        if (!keydown) fadeOut /= 2;
+        keydown = true;
+    } else {
+      keydown = false
     }
 
     let step = h / 30;
