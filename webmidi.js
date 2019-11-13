@@ -1,6 +1,7 @@
 let w = 0, h = 0;
 let lastTimestamp = 0;
 let speed = 0.25;
+let fadeOut = 1;
 
 let keyboardEvents = [];
 let audioContext = new AudioContext();
@@ -88,7 +89,7 @@ function getMIDIMessage(midiMessage) {
         for (let i = keyboardEvents.length - 1; i >= 0; i--) {
             if (keyboardEvents[i].key === key) {
                 keyboardEvents[i].release = timestamp;
-                keyboardEvents[i].audio.gain.exponentialRampToValueAtTime(0.00001, audioContext.currentTime + 1);
+                keyboardEvents[i].audio.gain.exponentialRampToValueAtTime(0.00001, audioContext.currentTime + fadeOut);
                 break;
             }
         }
@@ -127,12 +128,22 @@ function frame(timestamp) {
 
     if (pressedKeys["1"]) {
       wave = 'sine';
-    } else if (pressedKeys["2"]) { 
+    } else if (pressedKeys["2"]) {
       wave = 'square';
     } else if (pressedKeys["3"]) {
       wave = 'sawtooth';
     } else if (pressedKeys["4"]) {
       wave = 'triangle';
+    }
+
+    if (pressedKeys["UpArrow"]) {
+        speed *= 2
+    } else if (pressedKeys["DownArrow"]) {
+        speed /= 2
+    } else if (pressedKeys["LeftArrow"]) {
+        fadeOut *= 2
+    } else if (pressedKeys["RightArrow"]) {
+        fadeOut /= 2
     }
 
     let step = h / 30;
