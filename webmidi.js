@@ -4,6 +4,9 @@ let speed = 0.25;
 
 let keyboardEvents = [];
 let audioContext = new AudioContext();
+let pressedKeys = {};
+
+let wave = 'square';
 
 let keys = {'48': {note: 'C', octave: 4, position: 1, sharp: false, frequency: 261.6},
             '49': {note: 'C#', octave: 4, position: 1, sharp: true, frequency: 277.2},
@@ -47,6 +50,9 @@ function pageLoad() {
     fixSize();
 
     navigator.requestMIDIAccess().then(onMIDISuccess, onMIDIFailure);
+
+    window.addEventListener("keydown", event => pressedKeys[event.key] = true);
+    window.addEventListener("keyup", event => pressedKeys[event.key] = false);
 
     window.requestAnimationFrame(frame);
 
@@ -94,7 +100,7 @@ function getMIDIMessage(midiMessage) {
 function playNote(frequency, velocity){
 
     let o = audioContext.createOscillator();
-    o.type="square";
+    o.type = wave;
     o.frequency.value=frequency;
     o.start();
 
@@ -118,6 +124,16 @@ function frame(timestamp) {
 
     context.fillStyle = 'blue';
     context.fillRect(0,0,w,h);
+
+    if (pressedKeys["1"]) {
+      wave = 'sine';
+    } else if (pressedKeys["2"]) { 
+      wave = 'square';
+    } else if (pressedKeys["3"]) {
+      wave = 'sawtooth';
+    } else if (pressedKeys["4"]) {
+      wave = 'triangle';
+    }
 
     let step = h / 30;
 
