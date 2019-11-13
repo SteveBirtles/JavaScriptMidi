@@ -143,7 +143,7 @@ function frame(timestamp) {
     } else if (pressedKeys["ArrowDown"]) {
         if (!keydown) speed /= 2;
         keydown = true;
-    } else if (promressedKeys["ArrowLeft"]) {
+    } else if (pressedKeys["ArrowLeft"]) {
         if (!keydown) fadeOut *= 2;
         keydown = true;
     } else if (pressedKeys["ArrowRight"]) {
