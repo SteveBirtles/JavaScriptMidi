@@ -149,8 +149,34 @@ function frame(timestamp) {
     } else if (pressedKeys["ArrowLeft"]) {
         if (!keydown) fadeOut /= 2;
         keydown = true;
+    } else if (pressedKeys["s"]) {
+
+      if (!keydown) {
+
+        let songSQL = '';
+        for (let k of keyboardEvents) {
+          songSQL += `INSERT INTO (SongID, Time, Duration, Note) VALUES (#, ${k.timestamp}, ${k.release - k.timestamp}, ${k.key.position});\n`;
+        }
+
+        let element = document.createElement('a');
+        element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(songSQL));
+        element.setAttribute('download', 'song.sql');
+
+        element.style.display = 'none';
+        document.body.appendChild(element);
+
+        element.click();
+
+        document.body.removeChild(element);
+
+        keydown = true;
+
+      }
+
     } else {
+
       keydown = false
+
     }
 
     let step = h / 30;
