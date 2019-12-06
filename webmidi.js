@@ -155,7 +155,7 @@ function frame(timestamp) {
 
         let songSQL = '';
         for (let k of keyboardEvents) {
-          songSQL += `INSERT INTO (SongID, Time, Duration, Note) VALUES (#, ${k.timestamp}, ${k.release - k.timestamp}, ${k.key.position});\n`;
+          songSQL += `INSERT INTO (SongID, Time, Duration, Note) VALUES (#, ${k.timestamp}, ${k.release - k.timestamp}, '${k.key.note}${k.key.octave}');\n`;
         }
 
         let element = document.createElement('a');
